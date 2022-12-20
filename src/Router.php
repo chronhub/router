@@ -30,6 +30,7 @@ final class Router
         return $this->mergeWithGroup($group);
     }
 
+    // todo to move
     public function fromConfiguration(array $configuration): void
     {
         foreach ($configuration as $domainType => $config) {
