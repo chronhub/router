@@ -13,14 +13,22 @@ use Chronhub\Message\Router\Exceptions\RouterRuleViolation;
 
 final class RouterTest extends UnitTestCase
 {
+    private Router $router;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $container = fn (): Container => Container::getInstance();
+        $this->router = new Router(new GroupFactory($container));
+    }
+
     /**
      * @test
      */
     public function it_can_be_instantiated(): void
     {
-        $router = new Router(new GroupFactory(Container::getInstance()));
-
-        $this->assertEmpty($router->all());
+        $this->assertEmpty($this->router->all());
     }
 
     /**
@@ -29,15 +37,13 @@ final class RouterTest extends UnitTestCase
      */
     public function it_create_domain_group(string $type): void
     {
-        $router = new Router(new GroupFactory(Container::getInstance()));
+        $group = $this->router->make($type, 'default');
 
-        $group = $router->make($type, 'default');
-
-        $this->assertSame($group, $router->get($type, 'default'));
+        $this->assertSame($group, $this->router->get($type, 'default'));
 
         $this->assertEquals($type, $group->getType());
         $this->assertEquals('default', $group->getName());
-        $this->assertCount(1, $router->all());
+        $this->assertCount(1, $this->router->all());
     }
 
     /**
@@ -46,15 +52,13 @@ final class RouterTest extends UnitTestCase
      */
     public function it_merge_with_existing_domain_type(string $type): void
     {
-        $router = new Router(new GroupFactory(Container::getInstance()));
+        $group1 = $this->router->make($type, 'default');
+        $group2 = $this->router->make($type, 'another');
 
-        $group1 = $router->make($type, 'default');
-        $group2 = $router->make($type, 'another');
+        $this->assertSame($group1, $this->router->get($type, 'default'));
+        $this->assertSame($group2, $this->router->get($type, 'another'));
 
-        $this->assertSame($group1, $router->get($type, 'default'));
-        $this->assertSame($group2, $router->get($type, 'another'));
-
-        $this->assertCount(1, $router->all());
+        $this->assertCount(1, $this->router->all());
     }
 
     /**
@@ -63,19 +67,17 @@ final class RouterTest extends UnitTestCase
      */
     public function it_check_if_domain_type_and_name_exists(string $type): void
     {
-        $router = new Router(new GroupFactory(Container::getInstance()));
+        $this->assertFalse($this->router->has($type, 'default'));
+        $this->assertFalse($this->router->has($type, 'another'));
 
-        $this->assertFalse($router->has($type, 'default'));
-        $this->assertFalse($router->has($type, 'another'));
+        $group1 = $this->router->make($type, 'default');
+        $group2 = $this->router->make($type, 'another');
 
-        $group1 = $router->make($type, 'default');
-        $group2 = $router->make($type, 'another');
+        $this->assertSame($group1, $this->router->get($type, 'default'));
+        $this->assertSame($group2, $this->router->get($type, 'another'));
 
-        $this->assertSame($group1, $router->get($type, 'default'));
-        $this->assertSame($group2, $router->get($type, 'another'));
-
-        $this->assertTrue($router->has($type, 'default'));
-        $this->assertTrue($router->has($type, 'another'));
+        $this->assertTrue($this->router->has($type, 'default'));
+        $this->assertTrue($this->router->has($type, 'another'));
     }
 
     /**
@@ -83,19 +85,17 @@ final class RouterTest extends UnitTestCase
      */
     public function it_clone_groups_as_collection(): void
     {
-        $router = new Router(new GroupFactory(Container::getInstance()));
+        $this->router->make('command', 'default');
+        $this->router->make('command', 'another');
 
-        $router->make('command', 'default');
-        $router->make('command', 'another');
+        $cloneCollection = $this->router->all();
+        $this->assertNotSame($cloneCollection, $this->router->all());
+        $this->assertEquals($cloneCollection, $this->router->all());
 
-        $cloneCollection = $router->all();
-        $this->assertNotSame($cloneCollection, $router->all());
-        $this->assertEquals($cloneCollection, $router->all());
+        $this->router->make('command', 'foo_bar');
 
-        $router->make('command', 'foo_bar');
-
-        $this->assertNotSame($cloneCollection, $router->all());
-        $this->assertNotEquals($cloneCollection, $router->all());
+        $this->assertNotSame($cloneCollection, $this->router->all());
+        $this->assertNotEquals($cloneCollection, $this->router->all());
     }
 
     /**
@@ -107,10 +107,8 @@ final class RouterTest extends UnitTestCase
         $this->expectException(RouterRuleViolation::class);
         $this->expectExceptionMessage("$type Reporter already exists with name default");
 
-        $router = new Router(new GroupFactory(Container::getInstance()));
-
-        $router->make($type, 'default');
-        $router->make($type, 'default');
+        $this->router->make($type, 'default');
+        $this->router->make($type, 'default');
     }
 
     public function provideGroupType(): Generator

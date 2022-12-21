@@ -31,7 +31,7 @@ final class GroupFactoryTest extends UnitTestCase
     {
         $group = new Group('command', 'default', new Routes());
 
-        $container = Container::getInstance();
+        $container = fn (): Container => Container::getInstance();
 
         $factory = new GroupFactory($container);
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Chronhub\Message\Router;
 
+use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\Container\Container;
 use function count;
@@ -14,8 +15,11 @@ use function array_is_list;
 
 class GroupFactory
 {
-    public function __construct(private readonly Container $container)
+    private Container $container;
+
+    public function __construct(Closure $container)
     {
+        $this->container = $container();
     }
 
     /**
