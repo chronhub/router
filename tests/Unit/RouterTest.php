@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Chronhub\Message\Router\Tests\Unit;
 
 use Generator;
-use Chronhub\Testing\UnitTest;
+use Chronhub\Testing\UnitTestCase;
 use Chronhub\Message\Router\Router;
 use Illuminate\Container\Container;
 use Chronhub\Message\Router\GroupFactory;
 use Chronhub\Message\Router\Exceptions\RouterRuleViolation;
 
-final class RouterTest extends UnitTest
+final class RouterTest extends UnitTestCase
 {
     /**
      * @test

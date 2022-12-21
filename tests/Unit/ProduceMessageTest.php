@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Chronhub\Message\Router\Tests\Unit;
 
 use Prophecy\Argument;
-use Chronhub\Testing\ProphecyTest;
 use Chronhub\Contracts\Message\Header;
+use Chronhub\Testing\ProphecyTestCase;
 use Chronhub\Contracts\Message\Envelop;
 use Chronhub\Testing\Stubs\MessageStub;
-use Chronhub\Testing\Double\SomeCommand;
 use Chronhub\Contracts\Router\MessageQueue;
 use Chronhub\Message\Router\ProduceMessage;
 use Chronhub\Contracts\Router\ProducerUnity;
+use Chronhub\Testing\Double\Message\SomeCommand;
 
-final class ProduceMessageTest extends ProphecyTest
+final class ProduceMessageTest extends ProphecyTestCase
 {
     /**
      * @test
@@ -47,6 +47,7 @@ final class ProduceMessageTest extends ProphecyTest
         $message = new MessageStub(SomeCommand::fromContent(['foo' => 'bar']), [Header::EVENT_DISPATCHED => false]);
 
         $unity->isSync($message)->willReturn(false)->shouldBeCalledOnce();
+
         $queue->toQueue(Argument::that(function (Envelop $message): Envelop {
             $this->assertTrue($message->header(Header::EVENT_DISPATCHED));
 

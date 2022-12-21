@@ -8,17 +8,17 @@ use stdClass;
 use Generator;
 use ValueError;
 use InvalidArgumentException;
-use Chronhub\Testing\UnitTest;
+use Chronhub\Testing\UnitTestCase;
 use Chronhub\Contracts\Message\Header;
-use Chronhub\Testing\Double\SomeEvent;
 use Chronhub\Contracts\Message\Envelop;
 use Chronhub\Testing\Stubs\MessageStub;
-use Chronhub\Testing\Double\SomeCommand;
 use Chronhub\Message\Router\ProducerStrategy;
-use Chronhub\Testing\Double\SomeAsyncCommand;
+use Chronhub\Testing\Double\Message\SomeEvent;
+use Chronhub\Testing\Double\Message\SomeCommand;
 use Chronhub\Message\Router\LogicalMessageProducer;
+use Chronhub\Testing\Double\Message\SomeAsyncCommand;
 
-final class LogicalMessageProducerTest extends UnitTest
+final class LogicalMessageProducerTest extends UnitTestCase
 {
     /**
      * @test

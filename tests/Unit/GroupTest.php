@@ -5,20 +5,20 @@ declare(strict_types=1);
 namespace Chronhub\Message\Router\Tests\Unit;
 
 use Generator;
-use Chronhub\Testing\UnitTest;
 use Chronhub\Message\Router\Group;
 use Chronhub\Message\Router\Route;
+use Chronhub\Testing\UnitTestCase;
 use Chronhub\Tracker\TrackMessage;
 use Chronhub\Message\Router\Routes;
 use Chronhub\Reporter\ReportCommand;
 use Chronhub\Contracts\Message\Envelop;
-use Chronhub\Testing\Double\SomeCommand;
 use Chronhub\Contracts\Message\Decorator;
 use Chronhub\Contracts\Reporter\Reporter;
 use Chronhub\Message\Router\QueueFactory;
+use Chronhub\Testing\Double\Message\SomeCommand;
 use Chronhub\Reporter\Subscribing\NoOpMessageSubscriber;
 
-final class GroupTest extends UnitTest
+final class GroupTest extends UnitTestCase
 {
     private Group $group;
 

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Chronhub\Message\Router\Tests\Unit;
 
-use Chronhub\Testing\UnitTest;
+use Chronhub\Testing\UnitTestCase;
 use Chronhub\Message\Router\Routes;
-use Chronhub\Testing\Double\SomeEvent;
-use Chronhub\Testing\Double\SomeCommand;
-use Chronhub\Testing\Double\AnotherCommand;
+use Chronhub\Testing\Double\Message\SomeEvent;
+use Chronhub\Testing\Double\Message\SomeCommand;
+use Chronhub\Testing\Double\Message\AnotherCommand;
 use Chronhub\Message\Router\Exceptions\RouterRuleViolation;
 
-final class RoutesTest extends UnitTest
+final class RoutesTest extends UnitTestCase
 {
     /**
      * @test

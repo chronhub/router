@@ -5,24 +5,24 @@ declare(strict_types=1);
 namespace Chronhub\Message\Router\Tests\Unit;
 
 use React\Promise\Deferred;
-use Chronhub\Testing\UnitTest;
 use Chronhub\Message\Router\Group;
 use Chronhub\Reporter\ReportEvent;
 use Chronhub\Reporter\ReportQuery;
+use Chronhub\Testing\UnitTestCase;
 use Chronhub\Tracker\TrackMessage;
 use Chronhub\Message\Router\Routes;
 use Illuminate\Container\Container;
 use Chronhub\Reporter\ReportCommand;
-use Chronhub\Testing\Double\SomeEvent;
-use Chronhub\Testing\Double\SomeQuery;
-use Chronhub\Testing\Double\SomeCommand;
 use Chronhub\Message\Router\GroupFactory;
-use Chronhub\Testing\Double\AnotherEvent;
+use Chronhub\Testing\Double\Message\SomeEvent;
+use Chronhub\Testing\Double\Message\SomeQuery;
 use Chronhub\Reporter\Subscribing\ConsumeEvent;
 use Chronhub\Reporter\Subscribing\ConsumeQuery;
+use Chronhub\Testing\Double\Message\SomeCommand;
 use Chronhub\Reporter\Subscribing\ConsumeCommand;
+use Chronhub\Testing\Double\Message\AnotherEvent;
 
-final class GroupFactoryTest extends UnitTest
+final class GroupFactoryTest extends UnitTestCase
 {
     /**
      * @test

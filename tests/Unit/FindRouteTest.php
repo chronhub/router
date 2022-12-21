@@ -7,19 +7,19 @@ namespace Chronhub\Message\Router\Tests\Unit;
 use Closure;
 use stdClass;
 use Generator;
-use Chronhub\Testing\UnitTest;
 use Chronhub\Message\Router\Group;
+use Chronhub\Testing\UnitTestCase;
 use Chronhub\Message\Router\Routes;
 use Illuminate\Container\Container;
 use Chronhub\Contracts\Message\Header;
 use Chronhub\Message\Router\FindRoute;
 use Chronhub\Testing\Stubs\MessageStub;
-use Chronhub\Testing\Double\SomeCommand;
 use Chronhub\Message\Router\QueueFactory;
+use Chronhub\Testing\Double\Message\SomeCommand;
 use Chronhub\Message\Router\Exceptions\RouteNotFound;
 use Chronhub\Message\Router\Exceptions\RouteHandlerNotSupported;
 
-final class FindRouteTest extends UnitTest
+final class FindRouteTest extends UnitTestCase
 {
     private SomeCommand $command;
 

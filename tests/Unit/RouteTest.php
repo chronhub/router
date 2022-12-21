@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Chronhub\Message\Router\Tests\Unit;
 
 use Generator;
-use Chronhub\Testing\UnitTest;
 use Chronhub\Message\Router\Route;
-use Chronhub\Testing\Double\SomeEvent;
-use Chronhub\Testing\Double\SomeQuery;
-use Chronhub\Testing\Double\SomeCommand;
+use Chronhub\Testing\UnitTestCase;
 use Chronhub\Message\Router\QueueFactory;
+use Chronhub\Testing\Double\Message\SomeEvent;
+use Chronhub\Testing\Double\Message\SomeQuery;
+use Chronhub\Testing\Double\Message\SomeCommand;
 use Chronhub\Message\Router\Exceptions\RouterRuleViolation;
 use function array_shift;
 
-final class RouteTest extends UnitTest
+final class RouteTest extends UnitTestCase
 {
     /**
      * @test

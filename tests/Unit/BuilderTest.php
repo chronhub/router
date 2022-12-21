@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Chronhub\Message\Router\Tests\Unit;
 
 use ValueError;
-use Chronhub\Testing\UnitTest;
+use Chronhub\Testing\UnitTestCase;
 use Chronhub\Tracker\TrackMessage;
 use Chronhub\Message\Router\Builder;
 use Chronhub\Reporter\ReportCommand;
@@ -16,7 +16,7 @@ use Chronhub\Message\Router\QueueFactory;
 use Chronhub\Reporter\Subscribing\NoOpMessageSubscriber;
 use Chronhub\Message\Router\Exceptions\RouterRuleViolation;
 
-final class BuilderTest extends UnitTest
+final class BuilderTest extends UnitTestCase
 {
     /**
      * @test

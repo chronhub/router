@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Chronhub\Message\Router\Tests\Unit;
 
-use Chronhub\Testing\UnitTest;
+use Chronhub\Testing\UnitTestCase;
 use Chronhub\Message\Router\QueueFactory;
 
-final class QueueFactoryTest extends UnitTest
+final class QueueFactoryTest extends UnitTestCase
 {
     /**
      * @test
